@@ -28,6 +28,9 @@ Before setting up the project, ensure that you have the following installed:
 3. Install project dependencies:
    ```bash
    npm install
+4. Create local varialbes in .env:
+   ```bash
+   MONGODB_URI=mongodb://localhost:27017/blog
 
 This will install all the necessary dependencies as specified in package.json.
 
