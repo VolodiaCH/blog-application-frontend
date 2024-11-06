@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   try {
     const posts = await getAllPosts();
 
-    if (!posts || posts.length === 0) {
+    if (!posts) {
       return {
         props: { error: "No posts available." },
       };

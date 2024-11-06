@@ -54,7 +54,7 @@ const CreatePost: React.FC = () => {
           required
         />
 
-        <ImageInputWithPreview initialImageUrl='' onImageChange={handleImageChange} />
+        <ImageInputWithPreview initialImageUrl='' onImageChange={handleImageChange} required />
 
         <TextAreaInput
           id='description'

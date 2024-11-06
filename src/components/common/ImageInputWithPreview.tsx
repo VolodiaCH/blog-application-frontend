@@ -3,11 +3,13 @@ import React, { useState } from "react";
 interface IImageInputWithPreview {
   initialImageUrl: string;
   onImageChange: (file: File | null) => void;
+  required?: boolean;
 }
 
 const ImageInputWithPreview: React.FC<IImageInputWithPreview> = ({
   initialImageUrl,
   onImageChange,
+  required = false,
 }) => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
@@ -37,8 +39,10 @@ const ImageInputWithPreview: React.FC<IImageInputWithPreview> = ({
       <input
         id='image'
         type='file'
+        accept='image/*'
         onChange={handleImageChange}
         className='border border-gray-300 shadow-sm rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-2'
+        required={required}
       />
     </div>
   );

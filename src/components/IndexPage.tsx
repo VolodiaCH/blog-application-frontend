@@ -17,7 +17,7 @@ const IndexPage: React.FC<IIndexPage> = ({ posts }) => {
   const calculatePostsPerPage = (): number => {
     if (!containerRef.current) return 1;
 
-    const containerWidth = containerRef.current.offsetWidth;
+    const containerWidth = window.innerWidth - CARD_PADDING;
     const columns = Math.floor((containerWidth + CARD_PADDING) / (CARD_WIDTH + CARD_PADDING));
     return Math.max(columns, 1);
   };
@@ -45,27 +45,21 @@ const IndexPage: React.FC<IIndexPage> = ({ posts }) => {
   }, [posts.length, postsPerPage]);
 
   return (
-    <div className='container mx-auto max-w-7xl px-4 py-8 flex flex-col justify-center h-screen'>
+    <div className='container mx-auto max-w-4xl px-4 py-8 flex flex-col justify-center min-h-screen'>
       <h1 className='text-3xl font-bold text-center text-gray-800'>Blog Posts</h1>
-      <div
-        ref={containerRef}
-        className={`grid grid-cols-${postsPerPage} gap-4 my-8`}
-        style={{ gridTemplateColumns: `repeat(${postsPerPage}, 1fr)` }}
-      >
-        {currentPosts.map((post) => {
-          return (
-            <div key={post._id} className='w-full flex flex-col items-center'>
-              <PostCard
-                id={post._id}
-                title={post.title}
-                description={post.description}
-                imageUrl={post.imageUrl}
-              />
-            </div>
-          );
-        })}
+      <div ref={containerRef} className='flex w-full my-8 justify-center'>
+        {currentPosts.map((post) => (
+          <div key={post._id} className='px-2 flex flex-col items-center'>
+            <PostCard
+              id={post._id}
+              title={post.title}
+              description={post.description}
+              imageUrl={post.imageUrl}
+            />
+          </div>
+        ))}
       </div>
-      <div className='flex flex-col items-center'>
+      <div className='flex flex-col items-center mt-4'>
         <Link href='create-post'>
           <button className='bg-orange-1 hover:bg-orange-2 text-white font-bold m-2 p-3 rounded'>
             Write new post
